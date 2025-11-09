@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
+import { Link, NavLink } from "react-router";
 
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
@@ -126,6 +127,11 @@ const MyTransactions = () => {
                 >
                   Delete
                 </button>
+
+                <NavLink to={`/transaction/${txn._id}`} className="btn btn-sm btn-info">
+                  View Details
+                </NavLink>
+
               </td>
             </tr>
           ))}
