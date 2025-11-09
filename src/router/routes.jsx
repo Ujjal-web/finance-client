@@ -7,6 +7,8 @@ import AddTransaction from "../pages/AddTransaction";
 import Reports from "../pages/Reports";
 import PrivateRoute from "./PrivateRoute";
 import MyTransactions from "../pages/MyTransactions";
+import NotFound from "../pages/NotFound";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -49,10 +51,18 @@ export const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
+            {
+                path: "/profile",
+                element: (
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
+                )
+            }
         ],
     },
     {
         path: "*",
-        element: <div className="text-center mt-20 text-xl">404 | Page Not Found</div>,
+        element: <NotFound />
     },
 ]);
