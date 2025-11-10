@@ -8,6 +8,7 @@ const MyTransactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingTxn, setEditingTxn] = useState(null);
+  const [sortOption, setSortOption] = useState("newest");
 
   useEffect(() => {
     if (!user?.email) return;
@@ -15,7 +16,8 @@ const MyTransactions = () => {
     fetch(`http://localhost:5000/transactions?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setTransactions(data.transactions || []);
+        const txns = data.transactions || [];
+        setTransactions(txns);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -78,6 +80,29 @@ const MyTransactions = () => {
       });
   };
 
+  const sortTransactions = (list, option) => {
+    const sorted = [...list];
+    switch (option) {
+      case "newest":
+        sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      case "oldest":
+        sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+        break;
+      case "high-amount":
+        sorted.sort((a, b) => b.amount - a.amount);
+        break;
+      case "low-amount":
+        sorted.sort((a, b) => a.amount - b.amount);
+        break;
+      default:
+        break;
+    }
+    return sorted;
+  };
+
+  const sortedTransactions = sortTransactions(transactions, sortOption);
+
   if (loading)
     return (
       <div className="flex justify-center items-center h-64">
@@ -94,9 +119,25 @@ const MyTransactions = () => {
 
   return (
     <div className="overflow-x-auto p-6">
-      <h2 className="text-3xl font-semibold mb-4 text-center">
-        My Transactions
-      </h2>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-3">
+        <h2 className="text-3xl font-semibold text-center md:text-left">
+          My Transactions
+        </h2>
+
+        <div className="flex items-center gap-2">
+          <label className="font-medium">Sort by:</label>
+          <select
+            className="select select-bordered"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="high-amount">Highest Amount</option>
+            <option value="low-amount">Lowest Amount</option>
+          </select>
+        </div>
+      </div>
 
       <table className="table w-full border">
         <thead className="bg-base-200">
@@ -110,20 +151,16 @@ const MyTransactions = () => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((txn) => (
+          {sortedTransactions.map((txn) => (
             <tr key={txn._id}>
               <td>{txn.type}</td>
               <td>{txn.category}</td>
               <td>${parseFloat(txn.amount).toFixed(2)}</td>
               <td>{txn.description}</td>
-              <td>
-                {txn.date
-                  ? new Date(txn.date).toLocaleDateString()
-                  : "N/A"}
-              </td>
+              <td>{txn.date ? new Date(txn.date).toLocaleDateString() : "N/A"}</td>
               <td className="flex gap-2 justify-center">
                 <Link to={`/transaction/${txn._id}`} className="btn btn-sm btn-info">
-                  View Details
+                  View
                 </Link>
                 <button
                   onClick={() => handleEdit(txn)}
@@ -145,7 +182,7 @@ const MyTransactions = () => {
 
       {editingTxn && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 transition-all duration-300">
-          <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl transform scale-100 animate-fadeIn">
+          <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl">
             <h3 className="text-2xl font-semibold mb-4 text-center text-gray-800">
               Edit Transaction
             </h3>
