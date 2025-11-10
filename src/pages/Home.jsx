@@ -25,7 +25,7 @@ const Home = () => {
 
     return (
         <div className="container mx-auto p-6">
-            <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-8 mb-8">
+            <section className="bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-8 mb-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
                         <h1 className="text-4xl md:text-5xl font-bold">FinEase</h1>
@@ -52,23 +52,75 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="grid md:grid-cols-3 gap-6">
+
+            <section className="grid md:grid-cols-3 gap-6 mb-12">
                 <div className="bg-base-200 p-6 rounded-lg shadow">
                     <h3 className="text-xl font-semibold mb-2">Add new transaction</h3>
-                    <p className="mb-4">Quickly add income or expenses to keep your records up to date.</p>
-                    <Link to="/add-transaction" className="btn btn-primary">Add Transaction</Link>
+                    <p className="mb-4">
+                        Quickly add income or expenses to keep your records up to date.
+                    </p>
+                    <Link to="/add-transaction" className="btn btn-primary">
+                        Add Transaction
+                    </Link>
                 </div>
 
                 <div className="bg-base-200 p-6 rounded-lg shadow">
                     <h3 className="text-xl font-semibold mb-2">My transactions</h3>
                     <p className="mb-4">View and manage all of your transactions.</p>
-                    <Link to="/my-transactions" className="btn btn-primary">View Transactions</Link>
+                    <Link to="/my-transactions" className="btn btn-primary">
+                        View Transactions
+                    </Link>
                 </div>
 
                 <div className="bg-base-200 p-6 rounded-lg shadow">
                     <h3 className="text-xl font-semibold mb-2">Analytics</h3>
                     <p className="mb-4">Visualize income and expense trends.</p>
-                    <Link to="/reports" className="btn btn-primary">Open Reports</Link>
+                    <Link to="/reports" className="btn btn-primary">
+                        Open Reports
+                    </Link>
+                </div>
+            </section>
+
+            <section className="my-12 bg-base-100 p-6 rounded-xl shadow">
+                <h2 className="text-3xl font-semibold mb-4 text-center">
+                    Budgeting Tips
+                </h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="p-4 border rounded-lg">
+                        <h4 className="font-bold mb-2">Track Every Expense</h4>
+                        <p>
+                            Write down or record every single expense you make, no matter how
+                            small. This builds awareness and shows where your money really goes.
+                        </p>
+                    </div>
+                    <div className="p-4 border rounded-lg">
+                        <h4 className="font-bold mb-2">Set a Realistic Budget</h4>
+                        <p>
+                            Base your monthly budget on actual income and prioritize essential
+                            costs first before discretionary spending.
+                        </p>
+                    </div>
+                    <div className="p-4 border rounded-lg">
+                        <h4 className="font-bold mb-2">Review and Adjust</h4>
+                        <p>
+                            Revisit your budget each month. Adjust for new expenses and track
+                            progress toward savings goals.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section className="my-12 bg-base-200 p-6 rounded-xl shadow">
+                <h2 className="text-3xl font-semibold mb-4 text-center">
+                    Why Financial Planning Matters
+                </h2>
+                <div className="max-w-4xl mx-auto text-center text-lg leading-relaxed">
+                    <p>
+                        Effective financial planning gives you control over your money. It helps
+                        you prepare for emergencies, reach life goals such as education or
+                        retirement, and reduce financial stress. With FinEase, you can plan,
+                        track, and visualize your finances all in one place.
+                    </p>
                 </div>
             </section>
         </div>
