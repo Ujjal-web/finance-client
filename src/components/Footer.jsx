@@ -21,6 +21,10 @@ const Footer = () => {
             </aside>
             <nav>
                 <div className="grid grid-flow-col gap-4">
+                    <a href="">Contact details</a>
+                    <a href="">Terms & Conditions</a>
+                </div>
+                <div className="grid grid-flow-col gap-4">
                     <a>
                         <svg
                             width="24"
