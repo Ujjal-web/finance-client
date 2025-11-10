@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router-dom";
 
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
@@ -43,6 +43,8 @@ const MyTransactions = () => {
       }
     });
   };
+
+  const handleEdit = (txn) => setEditingTxn(txn);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -95,6 +97,7 @@ const MyTransactions = () => {
       <h2 className="text-3xl font-semibold mb-4 text-center">
         My Transactions
       </h2>
+
       <table className="table w-full border">
         <thead className="bg-base-200">
           <tr>
@@ -108,30 +111,32 @@ const MyTransactions = () => {
         </thead>
         <tbody>
           {transactions.map((txn) => (
-            <tr key={txn._id} className="hover">
+            <tr key={txn._id}>
               <td>{txn.type}</td>
               <td>{txn.category}</td>
-              <td>${txn.amount}</td>
+              <td>${parseFloat(txn.amount).toFixed(2)}</td>
               <td>{txn.description}</td>
-              <td>{new Date(txn.date).toLocaleDateString()}</td>
-              <td className="text-center space-x-2">
+              <td>
+                {txn.date
+                  ? new Date(txn.date).toLocaleDateString()
+                  : "N/A"}
+              </td>
+              <td className="flex gap-2 justify-center">
+                <Link to={`/transaction/${txn._id}`} className="btn btn-sm btn-info">
+                  View Details
+                </Link>
                 <button
-                  onClick={() => setEditingTxn(txn)}
-                  className="btn btn-sm btn-info text-white"
+                  onClick={() => handleEdit(txn)}
+                  className="btn btn-sm btn-warning"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(txn._id)}
-                  className="btn btn-sm btn-error text-white"
+                  className="btn btn-sm btn-error"
                 >
                   Delete
                 </button>
-
-                <NavLink to={`/transaction/${txn._id}`} className="btn btn-sm btn-info">
-                  View Details
-                </NavLink>
-
               </td>
             </tr>
           ))}
@@ -185,7 +190,7 @@ const MyTransactions = () => {
               <input
                 type="date"
                 name="date"
-                defaultValue={editingTxn.date}
+                defaultValue={editingTxn.date?.split("T")[0]}
                 className="input input-bordered w-full"
                 required
               />

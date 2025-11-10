@@ -23,6 +23,7 @@ const TransactionDetails = () => {
                     return;
                 }
                 setTransaction(data.transaction);
+                setCategoryTotal(data.totalAmount || 0);
                 setLoading(false);
             })
             .catch(() => {
