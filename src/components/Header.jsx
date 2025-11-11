@@ -39,7 +39,7 @@ const Header = () => {
     };
 
     const activeStyle = ({ isActive }) =>
-        isActive ? "text-primary font-semibold underline" : "hover:text-primary";
+        isActive ? "text-accent font-semibold underline" : "hover:text-accent transition";
 
     const navLinks = (
         <>
@@ -77,20 +77,25 @@ const Header = () => {
     );
 
     return (
-        <header className="bg-base-100 shadow-md sticky top-0 z-50 ">
-            <div className="navbar container mx-auto p-4 flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold text-primary">
+        <header className="sticky top-0 z-50 bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-900 text-white shadow-lg">
+            <div className="navbar container mx-auto px-6 py-4 flex justify-between items-center">
+                {/* Logo */}
+                <Link to="/" className="text-3xl font-extrabold tracking-wide flex items-center gap-2">
+                    <span className="bg-white text-indigo-700 rounded-md px-2 py-1 text-xl font-bold shadow">
+                        FE
+                    </span>
                     FinEase
                 </Link>
 
-                <div className="hidden md:flex items-center gap-6">
+                {/* Desktop Menu */}
+                <div className="hidden md:flex items-center gap-8">
                     <ul className="flex gap-6 font-medium">{navLinks}</ul>
 
                     {user ? (
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setUserDropdownOpen((s) => !s)}
-                                className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none"
+                                className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/40 hover:border-white transition"
                                 title="User menu"
                             >
                                 {user.photoURL ? (
@@ -100,25 +105,19 @@ const Header = () => {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
-                                    <div className="w-full h-full bg-gray-400 flex items-center justify-center text-white font-semibold">
+                                    <div className="w-full h-full bg-indigo-400 flex items-center justify-center text-white font-semibold">
                                         {user.displayName?.charAt(0)?.toUpperCase() || "U"}
                                     </div>
                                 )}
                             </button>
 
                             {userDropdownOpen && (
-                                <div
-                                    className="absolute right-0 top-full mt-2 w-56 bg-white text-black rounded-md shadow-lg p-3 z-50 border"
-                                >
-                                    <p className="font-semibold text-sm truncate">
-                                        {user.displayName || "User"}
-                                    </p>
-                                    <p className="text-xs text-gray-600 break-all mb-3">
-                                        {user.email}
-                                    </p>
+                                <div className="absolute right-0 top-full mt-3 w-60 bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-200 p-4 z-50 animate-fadeIn">
+                                    <p className="font-semibold text-sm truncate">{user.displayName || "User"}</p>
+                                    <p className="text-xs text-gray-600 break-all mb-4">{user.email}</p>
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full text-left px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                        className="w-full px-3 py-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-500 text-white hover:from-red-600 hover:to-pink-600 transition"
                                     >
                                         Log out
                                     </button>
@@ -127,10 +126,16 @@ const Header = () => {
                         </div>
                     ) : (
                         <div className="flex gap-2">
-                            <Link to="/login" className="btn btn-sm btn-outline">
+                            <Link
+                                to="/login"
+                                className="btn btn-sm btn-outline border-white text-white hover:bg-white hover:text-indigo-700 transition"
+                            >
                                 Login
                             </Link>
-                            <Link to="/register" className="btn btn-sm btn-primary">
+                            <Link
+                                to="/register"
+                                className="btn btn-sm bg-white text-indigo-700 font-semibold hover:bg-indigo-100 transition"
+                            >
                                 Register
                             </Link>
                         </div>
@@ -138,15 +143,16 @@ const Header = () => {
 
                     <button
                         onClick={handleThemeToggle}
-                        className="btn btn-ghost btn-circle text-xl"
+                        className="btn btn-ghost btn-circle text-xl text-white hover:text-yellow-300 transition"
                         title="Toggle Theme"
                     >
                         {theme === "light" ? <FaMoon /> : <FaSun />}
                     </button>
                 </div>
 
+                {/* Mobile Menu Button */}
                 <div className="md:hidden">
-                    <button onClick={() => setMenuOpen((s) => !s)} className="btn btn-ghost">
+                    <button onClick={() => setMenuOpen((s) => !s)} className="btn btn-ghost text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -154,49 +160,45 @@ const Header = () => {
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M4 6h16M4 12h16m-7 6h7"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
                     </button>
                 </div>
             </div>
 
+            {/* Mobile Dropdown */}
             {menuOpen && (
-                <div className="md:hidden bg-base-200 border-t">
-                    <ul className="flex flex-col gap-2 px-4 py-3">{navLinks}</ul>
-                    <div className="flex flex-col items-center gap-2 pb-3">
+                <div className="md:hidden bg-gradient-to-b from-indigo-800 to-blue-900 text-white border-t border-white/20">
+                    <ul className="flex flex-col gap-3 px-4 py-4 text-center font-medium">{navLinks}</ul>
+                    <div className="flex flex-col items-center gap-3 pb-4">
                         {user ? (
                             <>
                                 <div className="flex items-center gap-3">
                                     {user.photoURL ? (
                                         <img src={user.photoURL} alt="Avatar" className="w-8 h-8 rounded-full" />
                                     ) : (
-                                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white">
+                                        <div className="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center text-white">
                                             {user.displayName?.charAt(0)?.toUpperCase() || "U"}
                                         </div>
                                     )}
                                     <div className="text-left">
                                         <div className="font-semibold text-sm">{user.displayName || "User"}</div>
-                                        <div className="text-xs text-gray-600 break-all">{user.email}</div>
+                                        <div className="text-xs text-gray-300 break-all">{user.email}</div>
                                     </div>
                                 </div>
                                 <button
                                     onClick={handleLogout}
-                                    className="btn btn-sm btn-error text-white w-32 mt-2"
+                                    className="btn btn-sm bg-gradient-to-r from-red-500 to-pink-500 text-white w-32 mt-2 hover:from-red-600 hover:to-pink-600"
                                 >
                                     Logout
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="btn btn-sm btn-outline w-32">
+                                <Link to="/login" className="btn btn-sm btn-outline w-32 text-white border-white">
                                     Login
                                 </Link>
-                                <Link to="/register" className="btn btn-sm btn-primary w-32">
+                                <Link to="/register" className="btn btn-sm bg-white text-indigo-700 w-32 font-semibold">
                                     Register
                                 </Link>
                             </>
@@ -204,7 +206,7 @@ const Header = () => {
 
                         <button
                             onClick={handleThemeToggle}
-                            className="btn btn-ghost btn-circle text-xl mt-2"
+                            className="btn btn-ghost btn-circle text-xl mt-2 text-white hover:text-yellow-300"
                         >
                             {theme === "light" ? <FaMoon /> : <FaSun />}
                         </button>

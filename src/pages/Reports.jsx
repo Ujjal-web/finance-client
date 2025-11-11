@@ -63,11 +63,6 @@ const Reports = () => {
 
     const balance = incomeTotal - expenseTotal;
 
-    const chartData = [
-        { name: "Income", value: incomeTotal },
-        { name: "Expense", value: expenseTotal },
-    ];
-
     const monthlyData = months.map((m, i) => {
         const monthIncome = transactions
             .filter(
@@ -83,6 +78,11 @@ const Reports = () => {
 
         return { month: m, Income: monthIncome, Expense: monthExpense };
     });
+
+    const chartData = [
+        { name: "Income", value: incomeTotal },
+        { name: "Expense", value: expenseTotal },
+    ];
 
     const COLORS = ["#22c55e", "#ef4444"];
 
@@ -108,8 +108,10 @@ const Reports = () => {
         );
 
     return (
-        <div className="p-6 md:p-10">
-            <h2 className="text-3xl font-semibold text-center mb-6">Financial Reports</h2>
+        <div className="p-6 md:p-10 bg-linear-to-br from-indigo-50 via-blue-50 to-slate-100 min-h-screen">
+            <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+                Financial Reports
+            </h2>
 
             <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <select
@@ -141,22 +143,24 @@ const Reports = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-10">
-                <div className="p-6 rounded-xl bg-green-100 text-green-700 font-semibold">
+                <div className="p-6 rounded-2xl bg-green-100 text-green-700 font-semibold shadow-md">
                     Total Income: ${incomeTotal.toFixed(2)}
                 </div>
-                <div className="p-6 rounded-xl bg-red-100 text-red-700 font-semibold">
+                <div className="p-6 rounded-2xl bg-red-100 text-red-700 font-semibold shadow-md">
                     Total Expense: ${expenseTotal.toFixed(2)}
                 </div>
                 <div
-                    className={`p-6 rounded-xl ${balance >= 0 ? "bg-blue-100 text-blue-700" : "bg-orange-100 text-orange-700"
-                        } font-semibold`}
+                    className={`p-6 rounded-2xl shadow-md font-semibold ${balance >= 0
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-orange-100 text-orange-700"
+                        }`}
                 >
                     Balance: ${balance.toFixed(2)}
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-base-200 p-6 rounded-xl shadow">
+                <div className="bg-white/80 p-6 rounded-2xl shadow-md hover:shadow-xl transition">
                     <h3 className="text-xl font-semibold mb-4 text-center">
                         Income vs Expense (Bar Chart)
                     </h3>
@@ -171,7 +175,7 @@ const Reports = () => {
                     </ResponsiveContainer>
                 </div>
 
-                <div className="bg-base-200 p-6 rounded-xl shadow">
+                <div className="bg-white/80 p-6 rounded-2xl shadow-md hover:shadow-xl transition">
                     <h3 className="text-xl font-semibold mb-4 text-center">
                         Income vs Expense (Pie Chart)
                     </h3>
@@ -196,7 +200,7 @@ const Reports = () => {
                 </div>
             </div>
 
-            <div className="bg-base-200 p-6 rounded-xl shadow mt-10">
+            <div className="bg-white/80 p-6 rounded-2xl shadow-md hover:shadow-xl mt-10 transition">
                 <h3 className="text-xl font-semibold mb-4 text-center">
                     Monthly Income vs Expense Trend
                 </h3>
@@ -207,8 +211,18 @@ const Reports = () => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="Income" stroke="#22c55e" strokeWidth={2} />
-                        <Line type="monotone" dataKey="Expense" stroke="#ef4444" strokeWidth={2} />
+                        <Line
+                            type="monotone"
+                            dataKey="Income"
+                            stroke="#22c55e"
+                            strokeWidth={2}
+                        />
+                        <Line
+                            type="monotone"
+                            dataKey="Expense"
+                            stroke="#ef4444"
+                            strokeWidth={2}
+                        />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

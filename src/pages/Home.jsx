@@ -30,13 +30,13 @@ const Home = () => {
         <div className="mx-auto p-6 md:px-24 bg-linear-to-br from-slate-50 to-indigo-50 text-gray-800">
             <BannerSection user={user} />
             <OverviewSection summary={summary} loading={loading} user={user} />
-            <div className="py-16 md:py-24 bg-white/80 backdrop-blur-sm">
+            <div className="pt-16 md:pt-24 bg-white/80 backdrop-blur-sm">
                 <StaticSections />
             </div>
 
 
 
-            <section className="relative py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-slate-100 overflow-hidden">
+            <section className="relative py-20 bg-linear-to-br from-indigo-50 via-blue-50 to-slate-100 overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div>
 
                 <div className="relative container mx-auto px-6">

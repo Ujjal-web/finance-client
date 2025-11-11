@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     const { createUser, updateUserProfile, googleLogin } = useContext(AuthContext);
@@ -25,11 +26,9 @@ const Register = () => {
         }
 
         createUser(email, password)
+            .then(() => updateUserProfile({ displayName: name, photoURL }))
             .then(() => {
-                return updateUserProfile({ displayName: name, photoURL });
-            })
-            .then(() => {
-                Swal.fire("Success", "Account created successfully", "success");
+                Swal.fire("Success", "Account created successfully!", "success");
                 navigate("/");
             })
             .catch((error) => {
@@ -40,7 +39,7 @@ const Register = () => {
     const handleGoogleRegister = () => {
         googleLogin()
             .then(() => {
-                Swal.fire("Success", "Registered with Google", "success");
+                Swal.fire("Success", "Registered with Google!", "success");
                 navigate("/");
             })
             .catch((error) => {
@@ -49,70 +48,80 @@ const Register = () => {
     };
 
     return (
-        <div className="hero bg-base-200 min-h-[80vh] lg:p-20">
-            <div className="hero-content flex-col lg:flex-row">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Register now!</h1>
-                    <p className="py-6">Create an account to manage your personal finances easily.</p>
-                </div>
+        <div className="min-h-[85vh] bg-linear-to-br from-indigo-50 via-blue-50 to-slate-100 flex justify-center items-center p-6">
+            <div className="bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl border border-slate-200 w-full max-w-md p-8">
+                <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+                <p className="text-center text-gray-500 mb-8">
+                    Manage your finances effortlessly with <span className="font-semibold text-indigo-600">FinEase</span>.
+                </p>
 
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body" onSubmit={handleRegister}>
-                        <fieldset className="fieldset">
-                            <label className="label">Name</label>
-                            <input
-                                type="text"
-                                className="input input-bordered"
-                                placeholder="Your name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                            />
-                            <label className="label">Photo URL</label>
-                            <input
-                                type="text"
-                                className="input input-bordered"
-                                placeholder="Photo URL"
-                                value={photoURL}
-                                onChange={(e) => setPhotoURL(e.target.value)}
-                            />
-                            <label className="label">Email</label>
-                            <input
-                                type="email"
-                                className="input input-bordered"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <label className="label">Password</label>
-                            <input
-                                type="password"
-                                className="input input-bordered"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                <form onSubmit={handleRegister} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input
+                            type="text"
+                            className="input input-bordered w-full"
+                            placeholder="Your full name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                            <button className="btn btn-neutral mt-4 w-full">Register</button>
-                            <button
-                                type="button"
-                                onClick={handleGoogleRegister}
-                                className="btn btn-outline mt-2 w-full"
-                            >
-                                Register with Google
-                            </button>
-                        </fieldset>
-                    </form>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Photo URL</label>
+                        <input
+                            type="text"
+                            className="input input-bordered w-full"
+                            placeholder="Profile image URL (optional)"
+                            value={photoURL}
+                            onChange={(e) => setPhotoURL(e.target.value)}
+                        />
+                    </div>
 
-                    <p className="text-center mb-3">
-                        Already have an account?{" "}
-                        <Link to="/login" className="link text-blue-500">
-                            Login here
-                        </Link>
-                    </p>
-                </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input
+                            type="email"
+                            className="input input-bordered w-full"
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input
+                            type="password"
+                            className="input input-bordered w-full"
+                            placeholder="Create a secure password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button className="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full mt-4 rounded-full">
+                        Register
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleGoogleRegister}
+                        className="btn btn-outline border-slate-300 hover:border-indigo-500 w-full mt-2 rounded-full flex items-center justify-center gap-2"
+                    >
+                        <FcGoogle size={20} /> Register with Google
+                    </button>
+                </form>
+
+                <p className="text-center text-gray-600 mt-6">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-indigo-600 hover:underline font-medium">
+                        Login here
+                    </Link>
+                </p>
             </div>
         </div>
     );

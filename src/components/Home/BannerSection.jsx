@@ -16,7 +16,7 @@ const BannerSection = ({ user }) => {
                     transition={{ duration: 0.8 }}
                     className="max-w-xl"
                 >
-                    <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-4 bg-linear-to-r from-white via-indigo-100 to-blue-200 bg-clip-text text-transparent drop-shadow-sm">
+                    <h1 className="text-2xl md:text-5xl font-extrabold leading-tight mb-4 bg-linear-to-r from-white via-indigo-100 to-blue-200 bg-clip-text text-transparent drop-shadow-sm">
                         {user?.displayName
                             ? `Welcome, ${user.displayName}!`
                             : "Your Money, Managed. Your Future, Secured."}

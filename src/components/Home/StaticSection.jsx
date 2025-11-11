@@ -6,7 +6,7 @@ const StaticSections = () => {
 
             <section className="relative py-20 px-6 bg-linear-to-br from-white via-slate-50 to-indigo-50">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h2 className="text-4xl font-extrabold mb-12 text-gray-800">
+                    <h2 className="text-2xl font-extrabold mb-12 text-gray-800 md:text-5xl leading-tight drop-shadow-sm">
                         Smart Budgeting Tips
                     </h2>
 
@@ -72,14 +72,21 @@ const StaticSections = () => {
                 </div>
             </section>
 
-            <section className="relative py-24 px-6 bg-linear-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white overflow-hidden">
+            <section className="relative py-24 px-6 bg-linear-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white rounded-3xl overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arches.png')]"></div>
 
                 <div className="relative max-w-5xl mx-auto text-center">
-                    <h2 className="text-4xl font-extrabold mb-6">
+                    <h2 className="text-2xl md:text-5xl font-extrabold leading-tight mb-4 bg-linear-to-r from-white via-indigo-100 to-blue-200 bg-clip-text text-transparent drop-shadow-sm">
                         Why Financial Planning Matters
                     </h2>
-                    <p className="text-lg md:text-xl text-indigo-100 leading-relaxed max-w-3xl mx-auto mb-10">
+                    <div className="m-5 rounded-xl overflow-hidden shadow-2xl border-4 border-white/50 inline-block">
+                        <img
+                            src="/planning.png"
+                            alt="Couple planning their financial future with a view of a city skyline"
+                            className="w-full max-h-96 object-cover"
+                        />
+                    </div>
+                    <p className="text-lg md:text-xl text-indigo-100 leading-relaxed max-w-3xl mx-auto">
                         Financial planning empowers you to shape your future with
                         confidence. It ensures stability, reduces stress, and helps you
                         achieve your dreams — whether that’s education, business, or
@@ -87,11 +94,6 @@ const StaticSections = () => {
                         your journey toward financial freedom starts today.
                     </p>
 
-                    <div className="flex justify-center">
-                        <button className="btn btn-outline border-white text-white hover:bg-white hover:text-indigo-700 rounded-full px-6 py-2 transition-all">
-                            Learn More
-                        </button>
-                    </div>
                 </div>
             </section>
         </>

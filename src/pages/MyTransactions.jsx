@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
+import { Wallet, ArrowDownCircle, ArrowUpCircle, Calendar, Edit3, Trash2, Eye } from "lucide-react";
 
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +14,16 @@ const MyTransactions = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:5000/transactions?email=${user.email}`)
+
+    let sortBy = "date";
+    let order = "desc";
+
+    if (sortOption === "newest") { sortBy = "date"; order = "desc"; }
+    else if (sortOption === "oldest") { sortBy = "date"; order = "asc"; }
+    else if (sortOption === "high-amount") { sortBy = "amount"; order = "desc"; }
+    else if (sortOption === "low-amount") { sortBy = "amount"; order = "asc"; }
+
+    fetch(`http://localhost:5000/transactions?email=${user.email}&sortBy=${sortBy}&order=${order}`)
       .then((res) => res.json())
       .then((data) => {
         const txns = data.transactions || [];
@@ -21,7 +31,8 @@ const MyTransactions = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [user]);
+  }, [user, sortOption]);
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -118,11 +129,9 @@ const MyTransactions = () => {
     );
 
   return (
-    <div className="overflow-x-auto p-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-3">
-        <h2 className="text-3xl font-semibold text-center md:text-left">
-          My Transactions
-        </h2>
+    <div className="p-6 container mx-auto">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+        <h2 className="text-3xl font-semibold text-center md:text-left">My Transactions</h2>
 
         <div className="flex items-center gap-2">
           <label className="font-medium">Sort by:</label>
@@ -139,47 +148,64 @@ const MyTransactions = () => {
         </div>
       </div>
 
-      <table className="table w-full border">
-        <thead className="bg-base-200">
-          <tr>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th className="text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedTransactions.map((txn) => (
-            <tr key={txn._id}>
-              <td>{txn.type}</td>
-              <td>{txn.category}</td>
-              <td>${parseFloat(txn.amount).toFixed(2)}</td>
-              <td>{txn.description}</td>
-              <td>{txn.date ? new Date(txn.date).toLocaleDateString() : "N/A"}</td>
-              <td className="flex gap-2 justify-center">
-                <Link to={`/transaction/${txn._id}`} className="btn btn-sm btn-info">
-                  View
-                </Link>
-                <button
-                  onClick={() => handleEdit(txn)}
-                  className="btn btn-sm btn-warning"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(txn._id)}
-                  className="btn btn-sm btn-error"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Card Layout */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {sortedTransactions.map((txn) => (
+          <div
+            key={txn._id}
+            className={`rounded-2xl h-full flex flex-col shadow-md p-6 border transition hover:shadow-xl ${txn.type === "Income" ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+              }`}
+          >
+            <div className="flex justify-between items-center mb-3">
+              <h3
+                className={`text-xl font-bold ${txn.type === "Income" ? "text-green-700" : "text-red-700"
+                  }`}
+              >
+                {txn.type}
+              </h3>
+              {txn.type === "Income" ? (
+                <ArrowUpCircle className="text-green-600" size={28} />
+              ) : (
+                <ArrowDownCircle className="text-red-600" size={28} />
+              )}
+            </div>
 
+            <p className="text-gray-700 mb-1">
+              <strong>Category:</strong> {txn.category}
+            </p>
+            <p className="text-gray-700 mb-1">
+              <strong>Amount:</strong>{" "}
+              <span className="text-lg font-semibold">${parseFloat(txn.amount || 0).toFixed(2)}</span>
+            </p>
+            <p className="text-gray-600 mb-3 flex items-center gap-1">
+              <Calendar size={16} /> {txn.date ? new Date(txn.date).toLocaleDateString() : "N/A"}
+            </p>
+
+            <div className="flex gap-2 mt-4 ">
+              <Link
+                to={`/transaction/${txn._id}`}
+                className="flex items-center gap-1 btn btn-sm btn-info flex-1 justify-center text-white"
+              >
+                <Eye size={16} /> View Details
+              </Link>
+              <button
+                onClick={() => handleEdit(txn)}
+                className="flex items-center gap-1 btn btn-sm btn-warning flex-1 justify-center text-white"
+              >
+                <Edit3 size={16} /> Edit
+              </button>
+              <button
+                onClick={() => handleDelete(txn._id)}
+                className="flex items-center gap-1 btn btn-sm btn-error flex-1 justify-center text-white"
+              >
+                <Trash2 size={16} /> Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Edit Modal */}
       {editingTxn && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 transition-all duration-300">
           <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl">
