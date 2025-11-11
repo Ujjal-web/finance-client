@@ -3,7 +3,7 @@ import { FaXTwitter, FaYoutube, FaFacebookF } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <footer className="footer footer-center bg-primary text-primary-content p-10 mt-12">
+        <footer className="footer footer-center bg-primary text-primary-content p-10">
             <aside>
                 <svg
                     width="50"

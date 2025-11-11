@@ -77,7 +77,7 @@ const Header = () => {
     );
 
     return (
-        <header className="bg-base-100 shadow-md sticky top-0 z-50">
+        <header className="bg-base-100 shadow-md sticky top-0 z-50 ">
             <div className="navbar container mx-auto p-4 flex justify-between items-center">
                 <Link to="/" className="text-2xl font-bold text-primary">
                     FinEase
