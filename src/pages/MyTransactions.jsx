@@ -23,7 +23,7 @@ const MyTransactions = () => {
     else if (sortOption === "high-amount") { sortBy = "amount"; order = "desc"; }
     else if (sortOption === "low-amount") { sortBy = "amount"; order = "asc"; }
 
-    fetch(`http://localhost:5000/transactions?email=${user.email}&sortBy=${sortBy}&order=${order}`)
+    fetch(`https://finance-server-seven.vercel.app/transactions?email=${user.email}&sortBy=${sortBy}&order=${order}`)
       .then((res) => res.json())
       .then((data) => {
         const txns = data.transactions || [];
@@ -43,7 +43,7 @@ const MyTransactions = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/transactions/${id}`, {
+        fetch(`https://finance-server-seven.vercel.app/transactions/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -70,7 +70,7 @@ const MyTransactions = () => {
       date: form.date.value,
     };
 
-    fetch(`http://localhost:5000/transactions/${editingTxn._id}`, {
+    fetch(`https://finance-server-seven.vercel.app/transactions/${editingTxn._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTxn),

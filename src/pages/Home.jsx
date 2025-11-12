@@ -14,7 +14,7 @@ const Home = () => {
         if (!user?.email) return;
 
         setLoading(true);
-        fetch(`http://localhost:5000/summary?email=${user.email}`)
+        fetch(`https://finance-server-seven.vercel.app/summary?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 if (data.success && data.summary) {

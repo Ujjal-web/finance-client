@@ -27,7 +27,7 @@ const Reports = () => {
     useEffect(() => {
         if (!user?.email) return;
         setLoading(true);
-        fetch(`http://localhost:5000/transactions?email=${user.email}`)
+        fetch(`https://finance-server-seven.vercel.app/transactions?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setTransactions(data.transactions || []);
