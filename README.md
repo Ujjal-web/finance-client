@@ -14,4 +14,3 @@ Live Link: [Click Here to Visit](https://finance-server.firebaseapp.com)
 + Set monthly budgets
 
 + View financial summaries with insightful charts
-and reports. 
