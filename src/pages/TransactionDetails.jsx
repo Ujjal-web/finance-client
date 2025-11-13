@@ -48,7 +48,7 @@ const TransactionDetails = () => {
         );
 
     return (
-        <div className="max-w-2xl mx-auto bg-base-200 p-6 rounded-lg shadow-lg mt-10">
+        <div className="max-w-2xl mx-auto bg-base-200 p-6 md:py-20 rounded-lg shadow-lg mt-10">
             <h2 className="text-3xl font-semibold mb-6 text-center">
                 Transaction Details
             </h2>
