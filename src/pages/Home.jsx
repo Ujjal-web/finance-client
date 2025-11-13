@@ -40,7 +40,7 @@ const Home = () => {
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div>
 
                 <div className="relative container mx-auto px-6">
-                    <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
+                    <h2 className="text-2xl font-extrabold md:text-5xl leading-tight drop-shadow-sm text-center text-gray-800 mb-12">
                         Manage Your Finances
                     </h2>
 

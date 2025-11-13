@@ -6,7 +6,7 @@ const BannerSection = ({ user }) => {
     return (
         <section className="relative py-20 px-6 md:px-16 overflow-hidden bg-linear-to-br from-indigo-700 via-indigo-600 to-blue-600 text-white rounded-3xl shadow-xl">
 
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div>
+            {/* <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div> */}
 
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-12 max-w-6xl mx-auto">
 
