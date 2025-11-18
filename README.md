@@ -10,7 +10,7 @@ Live Link: [Click Here to Visit](https://finance-server.firebaseapp.com)
 + Set monthly budgets
 + View financial summaries with insightful charts
 
-⭐ About FinEase
+## ⭐ About FinEase
 
 FinEase is a modern personal finance tracking application designed to help users manage income, expenses, budgets, and financial insights — all in one place. It offers full authentication, CRUD functionality, interactive charts, and a clean, consistent UI across the entire platform.
 
@@ -43,4 +43,12 @@ This project demonstrates skills in:
 ⚠️ 404 Page & Loading Spinners
 
 🎨 Beautiful, consistent UI inspired by FinTech apps
+
+## 🚀 Deployment
+
++ Client deployed on Firebase Hosting
+
++ Server deployed on Vercel
+
++ MongoDB Atlas used for cloud storage
 
