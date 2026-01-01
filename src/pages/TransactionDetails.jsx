@@ -79,7 +79,7 @@ const TransactionDetails = () => {
                 </p>
             </div>
 
-            <div className="mt-6 p-4 bg-white rounded-lg shadow text-center">
+            <div className="mt-6 p-4 bg-base-100 rounded-lg shadow text-center">
                 <h3 className="text-xl font-semibold">
                     Total {transaction.type} in {transaction.category}
                 </h3>

@@ -48,16 +48,16 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-[85vh] bg-linear-to-br from-indigo-50 via-blue-50 to-slate-100 flex justify-center items-center p-6">
-            <div className="bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl border border-slate-200 w-full max-w-md p-8">
-                <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
-                <p className="text-center text-gray-500 mb-8">
-                    Manage your finances effortlessly with <span className="font-semibold text-indigo-600">FinEase</span>.
+        <div className="min-h-[85vh] bg-base-200 flex justify-center items-center p-6">
+            <div className="bg-base-100/90 backdrop-blur-md shadow-2xl rounded-2xl border border-base-300 w-full max-w-md p-8">
+                <h2 className="text-4xl font-bold text-center text-base-content mb-6">Create Account</h2>
+                <p className="text-center text-base-content/70 mb-8">
+                    Manage your finances effortlessly with <span className="font-semibold text-indigo-600 dark:text-indigo-400">FinEase</span>.
                 </p>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <label className="block text-sm font-medium text-base-content/80 mb-1">Name</label>
                         <input
                             type="text"
                             className="input input-bordered w-full"
@@ -69,7 +69,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Photo URL</label>
+                        <label className="block text-sm font-medium text-base-content/80 mb-1">Photo URL</label>
                         <input
                             type="text"
                             className="input input-bordered w-full"
@@ -80,7 +80,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-base-content/80 mb-1">Email</label>
                         <input
                             type="email"
                             className="input input-bordered w-full"
@@ -92,7 +92,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <label className="block text-sm font-medium text-base-content/80 mb-1">Password</label>
                         <input
                             type="password"
                             className="input input-bordered w-full"
@@ -103,22 +103,22 @@ const Register = () => {
                         />
                     </div>
 
-                    <button className="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full mt-4 rounded-full">
+                    <button className="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full mt-4 rounded-full border-none">
                         Register
                     </button>
 
                     <button
                         type="button"
                         onClick={handleGoogleRegister}
-                        className="btn btn-outline border-slate-300 hover:border-indigo-500 w-full mt-2 rounded-full flex items-center justify-center gap-2"
+                        className="btn btn-outline border-base-300 hover:border-indigo-500 text-base-content w-full mt-2 rounded-full flex items-center justify-center gap-2"
                     >
                         <FcGoogle size={20} /> Register with Google
                     </button>
                 </form>
 
-                <p className="text-center text-gray-600 mt-6">
+                <p className="text-center text-base-content/70 mt-6">
                     Already have an account?{" "}
-                    <Link to="/login" className="text-indigo-600 hover:underline font-medium">
+                    <Link to="/login" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">
                         Login here
                     </Link>
                 </p>

@@ -52,9 +52,9 @@ const AddTransaction = () => {
     };
 
     return (
-        <section className="min-h-[80vh] py-16 bg-linear-to-br from-slate-50 via-indigo-50 to-blue-50">
-            <div className="max-w-xl mx-auto bg-white/80 backdrop-blur-sm border border-indigo-100 p-10 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
-                <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+        <section className="min-h-[80vh] py-16 bg-base-200">
+            <div className="max-w-xl mx-auto bg-base-100/80 backdrop-blur-sm border border-base-300 p-10 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                <h2 className="text-4xl font-extrabold text-center text-base-content mb-8">
                     Add Transaction
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -134,7 +134,7 @@ const AddTransaction = () => {
                                 type="text"
                                 readOnly
                                 value={user?.displayName || ""}
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full bg-base-200"
                             />
                         </div>
                         <div>
@@ -143,7 +143,7 @@ const AddTransaction = () => {
                                 type="email"
                                 readOnly
                                 value={user?.email || ""}
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full bg-base-200"
                             />
                         </div>
                     </div>

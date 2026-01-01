@@ -4,8 +4,8 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <footer className="relative bg-linear-to-br from-indigo-700 via-blue-700 to-indigo-900 text-white py-14 overflow-hidden">
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')]"></div>
+        <footer className="relative bg-linear-to-br from-indigo-700 via-blue-700 to-indigo-900 dark:bg-none dark:bg-base-300 text-white dark:text-base-content py-14 overflow-hidden border-t dark:border-base-content/10">
+            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')] dark:opacity-5"></div>
 
             <div className="relative container mx-auto px-6 flex flex-col items-center text-center gap-6">
                 {/* Logo Section */}
@@ -17,20 +17,20 @@ const Footer = () => {
                         </span>
                         FinEase
                     </Link>
-                    <p className="text-white/80">
+                    <p className="text-white/80 dark:text-base-content/70">
                         © {new Date().getFullYear()} FinEase — Personal Finance App
                     </p>
                 </div>
 
                 {/* Links Section */}
-                <nav className="flex flex-wrap justify-center gap-6 text-white/80 font-medium text-sm mt-3">
-                    <a href="#" className="hover:text-white transition">
+                <nav className="flex flex-wrap justify-center gap-6 text-white/80 dark:text-base-content/70 font-medium text-sm mt-3">
+                    <a href="#" className="hover:text-white dark:hover:text-base-content transition">
                         Contact Us
                     </a>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="hover:text-white dark:hover:text-base-content transition">
                         Terms & Conditions
                     </a>
-                    <a href="#" className="hover:text-white transition">
+                    <a href="#" className="hover:text-white dark:hover:text-base-content transition">
                         Privacy Policy
                     </a>
                 </nav>
@@ -42,28 +42,28 @@ const Footer = () => {
                         aria-label="X (Twitter)"
                         className="hover:scale-110 transition-transform"
                     >
-                        <FaXTwitter className="w-6 h-6 text-white/80 hover:text-white transition" />
+                        <FaXTwitter className="w-6 h-6 text-white/80 dark:text-base-content/70 hover:text-white dark:hover:text-base-content transition" />
                     </a>
                     <a
                         href="https://youtube.com"
                         aria-label="YouTube"
                         className="hover:scale-110 transition-transform"
                     >
-                        <FaYoutube className="w-6 h-6 text-white/80 hover:text-white transition" />
+                        <FaYoutube className="w-6 h-6 text-white/80 dark:text-base-content/70 hover:text-white dark:hover:text-base-content transition" />
                     </a>
                     <a
                         href="https://www.facebook.com/"
                         aria-label="Facebook"
                         className="hover:scale-110 transition-transform"
                     >
-                        <FaFacebookF className="w-6 h-6 text-white/80 hover:text-white transition" />
+                        <FaFacebookF className="w-6 h-6 text-white/80 dark:text-base-content/70 hover:text-white dark:hover:text-base-content transition" />
                     </a>
                 </div>
 
 
-                <div className="w-3/4 border-t border-white/20 mt-8"></div>
+                <div className="w-3/4 border-t border-white/20 dark:border-base-content/20 mt-8"></div>
 
-                <p className="text-white/60 text-sm italic mt-3">
+                <p className="text-white/60 dark:text-base-content/50 text-sm italic mt-3">
                     “Take control of your money, and your future will follow.”
                 </p>
             </div>

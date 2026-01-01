@@ -1,10 +1,16 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
 @plugin "daisyui";
+@custom-variant dark (&:is([data-theme=dark], [data-theme=dark] *));
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
+}
+
+body {
+    @apply bg-base-100 text-base-content;
 }
 
 #root {
