@@ -12,9 +12,9 @@ const StaticSections = () => {
 
                     <div className="grid md:grid-cols-3 gap-8">
 
-                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                             <div className="flex justify-center mb-4">
-                                <div className="bg-indigo-100 dark:bg-indigo-900 p-3 rounded-full">
+                                <div className="bg-primary/10 p-3 rounded-full">
                                     <img
                                         src="https://cdn-icons-png.flaticon.com/512/478/478544.png"
                                         alt="track icon"
@@ -22,7 +22,7 @@ const StaticSections = () => {
                                     />
                                 </div>
                             </div>
-                            <h4 className="text-xl font-semibold text-indigo-700 dark:text-indigo-400 mb-3">
+                            <h4 className="text-xl font-semibold text-primary mb-3">
                                 Track Every Expense
                             </h4>
                             <p className="text-base-content/70 leading-relaxed">
@@ -31,9 +31,9 @@ const StaticSections = () => {
                             </p>
                         </div>
 
-                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                             <div className="flex justify-center mb-4">
-                                <div className="bg-green-100 dark:bg-green-900 p-3 rounded-full">
+                                <div className="bg-secondary/10 p-3 rounded-full">
                                     <img
                                         src="https://cdn-icons-png.flaticon.com/512/1998/1998615.png"
                                         alt="budget icon"
@@ -41,7 +41,7 @@ const StaticSections = () => {
                                     />
                                 </div>
                             </div>
-                            <h4 className="text-xl font-semibold text-green-700 dark:text-green-400 mb-3">
+                            <h4 className="text-xl font-semibold text-secondary mb-3">
                                 Set a Realistic Budget
                             </h4>
                             <p className="text-base-content/70 leading-relaxed">
@@ -50,9 +50,9 @@ const StaticSections = () => {
                             </p>
                         </div>
 
-                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-300 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="bg-base-100/90 backdrop-blur-sm border border-base-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                             <div className="flex justify-center mb-4">
-                                <div className="bg-purple-100 dark:bg-purple-900 p-3 rounded-full">
+                                <div className="bg-neutral/10 p-3 rounded-full">
                                     <img
                                         src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png"
                                         alt="review icon"
@@ -60,7 +60,7 @@ const StaticSections = () => {
                                     />
                                 </div>
                             </div>
-                            <h4 className="text-xl font-semibold text-purple-700 dark:text-purple-400 mb-3">
+                            <h4 className="text-xl font-semibold text-neutral mb-3">
                                 Review Regularly
                             </h4>
                             <p className="text-base-content/70 leading-relaxed">
@@ -72,7 +72,7 @@ const StaticSections = () => {
                 </div>
             </section>
 
-            <section className="relative py-24 px-6 bg-linear-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white rounded-3xl overflow-hidden">
+            <section className="relative py-24 px-6 bg-gradient-to-r from-primary to-indigo-900 text-primary-content rounded-3xl overflow-hidden shadow-xl mx-4 my-8">
                 <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arches.png')]"></div>
 
                 <div className="relative max-w-5xl mx-auto text-center">
@@ -90,7 +90,7 @@ const StaticSections = () => {
                         Financial planning empowers you to shape your future with
                         confidence. It ensures stability, reduces stress, and helps you
                         achieve your dreams — whether that’s education, business, or
-                        retirement. With <span className="font-semibold text-white">FinEase</span>,
+                        retirement. With <span className="font-bold text-white uppercase tracking-wider">FinEase</span>,
                         your journey toward financial freedom starts today.
                     </p>
 

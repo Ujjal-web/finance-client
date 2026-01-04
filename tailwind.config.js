@@ -4,14 +4,12 @@ export default {
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
-    darkMode: ['selector', '[data-theme="dark"]'], // Sync with DaisyUI
+    darkMode: ['selector', '[data-theme="dark"]'],
     theme: {
-        extend: {},
-    },
-    plugins: [
-        require('daisyui'),
-    ],
-    daisyui: {
-        themes: ["light", "dark"],
+        extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            }
+        },
     },
 }

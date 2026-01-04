@@ -5,13 +5,16 @@ import { RouterProvider } from 'react-router'
 import { router } from './router/routes.jsx'
 import AuthProvider from './context/AuthProvider.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
+import { RoleProvider } from './context/RoleContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <RoleProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </RoleProvider>
     </AuthProvider>
   </StrictMode>,
 )

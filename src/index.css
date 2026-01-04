@@ -1,8 +1,8 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @config "../tailwind.config.js";
 @plugin "daisyui";
 @custom-variant dark (&:is([data-theme=dark], [data-theme=dark] *));
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
     font-family: "Inter", sans-serif;
@@ -11,6 +11,33 @@
 
 body {
     @apply bg-base-100 text-base-content;
+}
+
+/* DaisyUI Theme Variables */
+[data-theme="light"] {
+    --p: 243 75% 60%; /* primary #4F46E5 */
+    --s: 175 84% 32%; /* secondary #0D9488 */
+    --a: 347 77% 50%; /* accent #E11D48 */
+    --n: 217 19% 27%; /* neutral #374151 */
+    --b1: 0 0% 100%; /* base-100 #ffffff */
+    --bc: 215 28% 17%; /* base-content #1f2937 */
+    --in: 199 89% 48%; /* info */
+    --su: 158 64% 52%; /* success */
+    --wa: 43 96% 56%; /* warning */
+    --er: 0 91% 71%; /* error */
+}
+
+[data-theme="dark"] {
+    --p: 244 85% 67%; /* primary #6366f1 */
+    --s: 173 80% 40%; /* secondary #14b8a6 */
+    --a: 350 89% 60%; /* accent #f43f5e */
+    --n: 215 28% 17%; /* neutral #1f2937 */
+    --b1: 215 28% 17%; /* base-100 #1f2937 */
+    --bc: 220 13% 96%; /* base-content #f3f4f6 */
+    --in: 199 89% 48%; /* info */
+    --su: 158 64% 52%; /* success */
+    --wa: 43 96% 56%; /* warning */
+    --er: 0 91% 71%; /* error */
 }
 
 #root {

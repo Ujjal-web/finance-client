@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../context/AuthProvider";
-import { ThemeContext } from "../context/ThemeContext";
+import { AuthContext } from "../../context/AuthProvider";
+import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
 import { Wallet, ArrowDownCircle, ArrowUpCircle, Calendar, Edit3, Trash2, Eye } from "lucide-react";
+import { TransactionSkeleton } from "../../components/SkeletonLoader";
 
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
@@ -118,8 +119,16 @@ const MyTransactions = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center h-64">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+          <div className="h-8 w-48 bg-base-200 rounded animate-pulse"></div>
+          <div className="h-10 w-40 bg-base-200 rounded animate-pulse"></div>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {[...Array(6)].map((_, i) => (
+            <TransactionSkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
 

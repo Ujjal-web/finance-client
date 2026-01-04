@@ -1,21 +1,68 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const Profile = () => {
-    const { user } = useContext(AuthContext);
-    const [displayName, setDisplayName] = useState(user?.displayName || "");
-    const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
+    const { user, updateUserProfile } = useContext(AuthContext);
+    const db = getFirestore();
+
+    const [displayName, setDisplayName] = useState("");
+    const [photoURL, setPhotoURL] = useState("");
     const [updating, setUpdating] = useState(false);
+
+    // Keep inputs in sync when auth user loads/changes
+    useEffect(() => {
+        setDisplayName(user?.displayName || "");
+        setPhotoURL(user?.photoURL || "");
+    }, [user]);
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        if (!user) return;
+        if (!user) {
+            Swal.fire({
+                icon: "error",
+                title: "Not logged in",
+                text: "Please log in again and try updating your profile.",
+            });
+            return;
+        }
+
+        // Optional: Skip if no changes
+        const newDisplayName = displayName.trim();
+        const newPhotoURL = photoURL.trim();
+        if (
+            newDisplayName === (user.displayName || "") &&
+            newPhotoURL === (user.photoURL || "")
+        ) {
+            Swal.fire({
+                icon: "info",
+                title: "No changes",
+                text: "Your profile is already up to date.",
+                timer: 1500,
+                showConfirmButton: false,
+            });
+            return;
+        }
 
         setUpdating(true);
         try {
-            await updateProfile(user, { displayName, photoURL });
+            // 1) Update Firebase Auth user
+            await updateUserProfile({
+                displayName: newDisplayName,
+                photoURL: newPhotoURL,
+            });
+
+            // 2) Persist to Firestore users collection
+            const userRef = doc(db, "users", user.uid);
+            await setDoc(
+                userRef,
+                {
+                    displayName: newDisplayName,
+                    photoURL: newPhotoURL,
+                },
+                { merge: true }
+            );
 
             Swal.fire({
                 icon: "success",
@@ -28,7 +75,7 @@ const Profile = () => {
             Swal.fire({
                 icon: "error",
                 title: "Update failed!",
-                text: err.message,
+                text: err?.message || "Something went wrong",
             });
         } finally {
             setUpdating(false);
@@ -36,11 +83,15 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-[80vh] flex justify-center items-center px-6 py-16 bg-base-200">
-            <div className="relative bg-base-100/90 backdrop-blur-sm border border-base-300 p-10 rounded-2xl shadow-xl w-full max-w-lg transition hover:shadow-2xl">
-                <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')] rounded-2xl"></div>
+        <div className="container mx-auto px-4 py-8 md:py-12 flex justify-center items-center min-h-[80vh]">
+            <div className="relative bg-base-100/90 backdrop-blur-sm border border-base-200 p-10 rounded-2xl shadow-xl w-full max-w-lg transition hover:shadow-2xl">
+                {/* IMPORTANT: prevent overlay from blocking clicks */}
+                <div
+                    className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/white-diamond.png')] rounded-2xl pointer-events-none -z-10"
+                    aria-hidden="true"
+                />
 
-                <div className="relative">
+                <div className="relative z-10">
                     <h2 className="text-4xl font-bold text-center text-base-content mb-8">
                         My Profile
                     </h2>
@@ -49,7 +100,7 @@ const Profile = () => {
                         <img
                             src={photoURL || "https://i.ibb.co/2Z3QvQ9/default-avatar.png"}
                             alt="User Avatar"
-                            className="w-28 h-28 rounded-full object-cover border-4 border-indigo-500 shadow-md mb-3"
+                            className="w-28 h-28 rounded-full object-cover border-4 border-primary shadow-md mb-3"
                         />
                         <h3 className="text-2xl font-semibold text-base-content">
                             {displayName || "Unnamed User"}
@@ -64,9 +115,10 @@ const Profile = () => {
                             </label>
                             <input
                                 type="text"
-                                className="input input-bordered w-full rounded-full bg-base-200"
+                                className="input input-bordered w-full rounded-lg bg-base-200 focus:input-primary"
                                 value={displayName}
                                 onChange={(e) => setDisplayName(e.target.value)}
+                                placeholder="Your name"
                             />
                         </div>
 
@@ -76,15 +128,16 @@ const Profile = () => {
                             </label>
                             <input
                                 type="text"
-                                className="input input-bordered w-full rounded-full bg-base-200"
+                                className="input input-bordered w-full rounded-lg bg-base-200 focus:input-primary"
                                 value={photoURL}
                                 onChange={(e) => setPhotoURL(e.target.value)}
+                                placeholder="https://example.com/photo.jpg"
                             />
                         </div>
 
                         <button
                             type="submit"
-                            className="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full rounded-full text-lg"
+                            className="btn btn-primary w-full rounded-lg text-lg"
                             disabled={updating}
                         >
                             {updating ? (
